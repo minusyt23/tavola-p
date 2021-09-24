@@ -1,0 +1,21 @@
+.pTable {
+    display:grid;
+    grid-auto-columns: 50px;
+} 
+
+.elemContainer {
+    border: 1px solid black;
+    text-align: center;
+    font-size: 8pt;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.elemSymbol {
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+.elemName {
+    font-size: 7pt;
+}
