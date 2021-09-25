@@ -1,5 +1,5 @@
 elements = [
-    {symbol: "H", name: "idrogeno"},
+    {symbol: "H", name: "idrogeno", oxidation: "+-1"},
     {symbol: null, spacing: 16},
     {symbol: "He", name: "elio"},
 

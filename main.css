@@ -1,7 +1,45 @@
+
+
+:root {
+    --mouseX: 0;
+    --mouseY: 0;
+}
+
 .pTable {
     display:grid;
-    grid-auto-columns: 50px;
+    grid-auto-columns: 64px;
 } 
+
+.elemZoomContainer {
+    grid-column: 3 / 6;
+    grid-row: 1 / 4;
+    
+    padding: 12px;
+
+}
+
+.elemZoom {
+    transform: translate3d(0, 0, 0);
+
+    height: 100%;
+    box-sizing: border-box;
+
+    border: 4px solid black;
+    text-align: center;
+    font-size: 16pt;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    transition: transform 170ms ease-out;
+    
+}
+
+.elemZoom.goBack {
+    transition: transform 0s linear;
+    transform: 
+        translate3d(var(--mouseX), var(--mouseY), 0)
+        scale(0.005);
+}
 
 .elemContainer {
     border: 1px solid black;
@@ -12,10 +50,15 @@
 }
 
 .elemSymbol {
-    font-size: 18pt;
+    font-size: 2.5em;
     font-weight: bold;
 }
 
 .elemName {
-    font-size: 7pt;
+    font-size: 0.95em;
+    font-weight: bold;
+}
+
+.elemOxidation {
+    font-size: 1em;
 }

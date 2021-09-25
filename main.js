@@ -3,15 +3,18 @@ const gridHeight = 7;
 
 var gridPos = 0;
 var pTable = document.getElementById("pTable");
+var elemZoom = document.getElementById("elemZoom");
 
 function createDivText(text, className) {
     let container = document.createElement("div");
-    container.classList = className;
+    if(className) {
+        container.classList = className;
+    }
 
     let textnode = document.createTextNode(text);
     container.appendChild(textnode);
     return container;
-}
+} 
 
 for (let i = 0, elemIndex = 1; i < elements.length; i++) {
     const element = elements[i];
@@ -35,16 +38,33 @@ for (let i = 0, elemIndex = 1; i < elements.length; i++) {
             elementContainer.classList = "elemContainer";
 
             let elementNumber = createDivText(`${elemIndex}`);
+            elementContainer.appendChild(elementNumber);
 
             let elementSymbol = createDivText(`${element.symbol}`, "elemSymbol");
+            elementContainer.appendChild(elementSymbol);
 
             let elementName = createDivText(`${element.name}`, "elemName");
-
-            elementContainer.appendChild(elementNumber);
-            elementContainer.appendChild(elementSymbol);
             elementContainer.appendChild(elementName);
 
+            let oxidationString = "";
+            if(element.oxidation) {
+                oxidationString = element.oxidation.replaceAll("+-", "±");
+            } else {
+                oxidationString = "--"
+            }
+            
+            let elementOxidation = createDivText(`${oxidationString}`, "elemOxidation");
+            elementContainer.appendChild(elementOxidation);
+
             elementGridContainer.appendChild(elementContainer);
+
+            elementContainer.addEventListener("click", () => {
+                elemZoom.classList.add("goBack");
+                elemZoom.innerHTML = elementContainer.innerHTML;
+                setTimeout(() => {
+                    elemZoom.classList.remove("goBack");
+                }, 1);
+            });
 
             gridPos++;
             elemIndex++;
@@ -54,3 +74,8 @@ for (let i = 0, elemIndex = 1; i < elements.length; i++) {
     pTable.appendChild(elementGridContainer);
 }
 
+
+window.addEventListener("mousemove", (e) => {
+    document.documentElement.style.setProperty("--mouseX", `${e.pageX - elemZoom.offsetLeft - elemZoom.offsetWidth / 2}px`);
+    document.documentElement.style.setProperty("--mouseY", `${e.pageY - elemZoom.offsetTop - elemZoom.offsetHeight / 2}px`);
+}); 
